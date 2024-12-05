@@ -1,0 +1,31 @@
+.not-found {
+    margin: auto;
+    width: 30%;
+    padding: 4vw 1vw;
+    text-align: center;
+}
+
+.not-found p {
+    text-align: center;
+}
+
+.not-found p:first-of-type {
+    font-size: 5vw;
+}
+
+.not-found p:last-of-type {
+    font-size: 2.5vw;
+}
+
+.not-found a {
+    display: inline-block;
+    margin-top: 1vw;
+    font-size: 0.9vw;
+    color: #a19090;
+    transition: 0.2s ease-in;
+}
+
+.not-found a:hover {
+    color: #ff5c5c;
+    scale: 1.02;
+}

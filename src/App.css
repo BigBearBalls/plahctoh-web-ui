@@ -1,0 +1,10 @@
+.App {
+  background-color: #fff8f3;
+  min-height: 100vh;
+  font-family: "Century Schoolbook L";
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+}
