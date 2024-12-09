@@ -33,8 +33,30 @@
 .header-body .account .logo {
     width: 1vw;
     height: 1vw;
-    background-color: red;
+}
+
+.header-body .account .logo {
+    width: 1vw;
+    height: 1vw;
     margin-left: 0.3vw;
+    cursor: pointer;
+    transition: 0.3s all;
+    color: black;
+}
+
+.header-body .account .logo > svg:hover {
+    color: #ff5c5c;
+    scale: 1.1;
+}
+
+.header-body .account .logo > svg:active {
+    color: #b10404;
+    scale: 1.1;
+}
+
+.header-body .account .active > svg {
+    color: #ff5c5c;
+    scale: 1.1;
 }
 
 .header-body .nav {
@@ -53,11 +75,11 @@
 
 .header-body .nav .li:hover {
     text-decoration: underline;
+    color: #ff5c5c;
 }
 
 .header-body .nav .active {
     text-decoration: underline;
-    /*color: #b10404;*/
     color: #ff5c5c;
     scale: none !important;
 }
@@ -73,4 +95,10 @@
     color: #ff5c5c;
     text-decoration: underline;
     scale: 1.05;
+}
+
+.header-body .logout-btn {
+    position: absolute;
+    right: 4vw;
+    text-decoration: underline;
 }

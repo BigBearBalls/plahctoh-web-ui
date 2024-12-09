@@ -1,10 +1,16 @@
 import React from 'react';
-import {Link, NavLink} from "react-router";
+import {NavLink} from "react-router";
 import {observer} from "mobx-react-lite";
 import "./HeaderStyles.css"
 import {accountStore, authStore} from "../../Context";
+import { VscAccount } from "react-icons/vsc";
 
 function Header() {
+
+    const handleLogout = () => {
+        authStore.logout();
+    }
+
     return (
         <header className="header">
             <div className="container">
@@ -21,7 +27,11 @@ function Header() {
                             <p className="name">
                                 {accountStore.user.firstName} {accountStore.user.lastName}
                             </p>
-                            <div className="logo"></div>
+                            <NavLink className={({isActive}) => isActive ?
+                                'active logo' : 'logo'} to="/account">
+                                <VscAccount className="logo"/>
+                            </NavLink>
+                            <p className="logout-btn btn-effect" onClick={handleLogout}>Logout</p>
                         </div>
                     </div>
                 </div>

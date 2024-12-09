@@ -5,7 +5,11 @@ import Layout from "./fragment/Layout";
 import {User} from "./models/User";
 import {accountStore, authStore, globalStore} from "./Context";
 import NotFoundPage from "./page/not-found/NotFoundPage";
-import AuthPage from "./page/auth-page/AuthPage";
+import LoginPage from "./page/auth-page/LoginPage";
+import RegistrationPage from "./page/registration/RegistrationPage";
+import PopUp from "./fragment/popup-block/PopUp";
+import {observer} from "mobx-react-lite";
+import AccountPage from "./page/account/AccountPage";
 
 function App() {
 
@@ -14,38 +18,33 @@ function App() {
   useEffect(() => {
     if (!isLoaded) {
       console.log("App loading", isLoaded);
-      console.log();
-      setIsLoaded(true);
+      authStore.checkAuth().then(()=>setIsLoaded(true));
       console.log("App loaded", isLoaded);
-      const user: User = {
-        id:"id",
-        firstName:"Artem",
-        lastName:"Yushkevich",
-        email:"Email",
-        phoneNumber:"Phone",
-        department:"Department",
-        teamLeader:"TeamLeader"}
-      accountStore.user = user
     }
   }, [])
 
   return (
     <div className="App">
+      <PopUp/>
+      {isLoaded &&
           <BrowserRouter>
               {globalStore.isAuthenticated ?
                   <Routes>
                       <Route path="/" element={<Layout/>}>
+                          <Route path="/account" element={<AccountPage />} />
                           <Route path="*" element={<NotFoundPage />} />
                       </Route>
                   </Routes> :
                   <Routes>
                     <Route path="*" element={<Navigate to="/login" replace />} />
-                    <Route path="/login" element={<AuthPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/registration" element={<RegistrationPage />} />
                   </Routes>
               }
           </BrowserRouter>
+      }
     </div>
   );
 }
 
-export default App;
+export default observer(App);

@@ -1,0 +1,31 @@
+.account-page {
+    padding: 2vw 2vw;
+}
+
+.account-page > p:first-of-type {
+    font-size: 2vw;
+    text-align: center;
+}
+
+.account-page .info-block {
+    display: flex;
+    margin-top: 2vw;
+}
+
+.account-page .info-block .account-image {
+    width: 17vw;
+    height: 17vw;
+    background-color: black;
+}
+
+.account-page .info-block .info {
+    padding-left: 2vw;
+}
+
+.account-page .info-block .info > p {
+    font-size: 1vw;
+}
+
+.account-page .info-block .info > p:not(:first-of-type) {
+    margin-top: 0.5vw;
+}

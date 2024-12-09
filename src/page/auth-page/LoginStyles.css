@@ -1,0 +1,147 @@
+.auth-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.auth-page > h1 {
+    font-size: 3vw;
+    margin: 7vw 0 4vw;
+}
+
+.auth-page-block {
+    border: 2px solid black;
+    padding: 3vw 3vw 2vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 20vw;
+}
+
+.auth-page-block > h1 {
+    font-size: 1.7vw;
+}
+
+.auth-page-block label {
+    width: 100%;
+}
+
+.auth-page-block > label:last-of-type {
+    position: relative;
+    margin-top: 1vw;
+}
+
+.auth-page-block > h1 {
+    margin-bottom: 1vw;
+}
+
+.auth-page-block > label > div:first-of-type {
+    font-size: 0.9vw;
+}
+
+.auth-page-block > label input {
+    width: 100%;
+    font-size:0.8vw;
+    background-color: transparent;
+    border: none;
+    padding-bottom: 0.2vw;
+}
+
+.auth-page-block > label input:focus {
+    outline: none;
+}
+
+.auth-page-block > button {
+    font-family: "Century Schoolbook L", serif;
+    padding: 0.5vw;
+    margin-top: 1vw;
+    width: 100%;
+    border-radius: 2vw;
+    border: 2px solid black;
+    background-color: transparent;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.8vw;
+    transition: 0.4s all;
+}
+
+.auth-page-block > .disabled {
+    cursor: not-allowed;
+    color: #bdbdbd;
+    border-color: #bdbdbd;
+}
+
+.auth-page-block > button:not(.disabled):not(.loading):hover {
+    scale: 1.07;
+    background-color: #d84f4f;
+    color: white;
+    border-color: white;
+}
+
+.auth-page-block > button:not(.disabled):not(.loading):active {
+    scale: 1.05;
+    background-color: #9c2323;
+    color: #d5d5d5;
+    border-color: #d5d5d5;
+}
+
+.auth-page-block > .loading {
+    cursor: wait;
+    background-color: #9c2323;
+    color: #d5d5d5;
+    border-color: #d5d5d5;
+}
+
+.auth-page-block > label .input-field {
+    margin-top: 0.5vw;
+    border-bottom: 1px solid black;
+    display: flex;
+}
+
+.auth-page-block > label .error {
+    border-color: #ff5c5c;
+}
+
+.auth-page-block > label .red-color {
+    margin-top: 0.3vw;
+    color: #ff5c5c;
+    font-size: 0.75vw;
+    word-wrap: break-word;
+}
+
+.auth-page-block > label .error-icon svg {
+    display: block;
+    height: 1vw;
+    width: 1vw;
+    color: #ff5c5c;
+    margin-left: 0.2vw;
+}
+
+.auth-page-block > label .password-visible-icon svg {
+    display: block;
+    width: 1vw;
+    height: 1vw;
+    margin-left: 0.4vw;
+}
+
+.auth-page-block .registration-link {
+    color: gray;
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 0.8vw;
+    margin-top: 0.8vw;
+    transition: 0.3s all;
+}
+
+.auth-page-block .registration-link:hover {
+    color: #ff5c5c;
+    user-select: none;
+    cursor: pointer;
+}
+
+.auth-page-block .registration-link:active {
+    color: #d84f4f;
+    user-select: none;
+}

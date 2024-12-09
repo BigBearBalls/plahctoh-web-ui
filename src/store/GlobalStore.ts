@@ -6,6 +6,15 @@ export default class GlobalStore {
     }
 
     private _isAuthenticated: boolean = false;
+    private _isLoading: boolean = false;
+
+    set isLoading(value: boolean) {
+        this._isLoading = value;
+    }
+
+    get isLoading() {
+        return this._isLoading;
+    }
 
     set isAuthenticated(value: boolean) {
         this._isAuthenticated = value;
