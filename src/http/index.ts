@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {Constants} from "../util/Constants";
-import {accountStore, authStore, globalStore} from "../Context";
+import {accountStore, globalStore, popUpStore} from "../Context";
 import {User} from "../models/User";
+import {Type} from "../fragment/popup-block/Type";
 
 export const API_URL = "http://localhost:7080/api/v1/";
 
@@ -12,6 +13,7 @@ export const API_URL = "http://localhost:7080/api/v1/";
 
 $api.interceptors.request.use((config) => {
     const token = localStorage.getItem(Constants.ACCESS_TOKEN_KEY);
+    console.log(token);
     if (token != null) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -36,10 +38,13 @@ $api.interceptors.response.use((config) => {
     //         localStorage.removeItem(Constants.ACCESS_TOKEN_KEY);
     //     }
     // }
-    globalStore.isAuthenticated = false;
-    accountStore.user = {} as User
-    localStorage.removeItem(Constants.ACCESS_TOKEN_KEY);
-
+    if (error.response && error.response.status === 401) {
+        globalStore.isAuthenticated = false;
+        accountStore.user = {} as User
+        localStorage.removeItem(Constants.ACCESS_TOKEN_KEY);
+        return
+    }
+    popUpStore.setPopUp(true, Type.ERROR, error.response.data.message);
     throw error;
 })
 

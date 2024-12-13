@@ -10,6 +10,7 @@ import RegistrationPage from "./page/registration/RegistrationPage";
 import PopUp from "./fragment/popup-block/PopUp";
 import {observer} from "mobx-react-lite";
 import AccountPage from "./page/account/AccountPage";
+import DepartmentPage from "./page/department/DepartmentPage";
 
 function App() {
 
@@ -31,7 +32,8 @@ function App() {
               {globalStore.isAuthenticated ?
                   <Routes>
                       <Route path="/" element={<Layout/>}>
-                          <Route path="/account" element={<AccountPage />} />
+                          <Route path="/account/:userId?" element={<AccountPage />} />
+                          <Route path="/departments" element={<DepartmentPage />} />
                           <Route path="*" element={<NotFoundPage />} />
                       </Route>
                   </Routes> :

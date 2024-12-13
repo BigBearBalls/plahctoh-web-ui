@@ -22,8 +22,31 @@
     padding-left: 2vw;
 }
 
-.account-page .info-block .info > p {
+.account-page .info-block .info p {
     font-size: 1vw;
+}
+
+.account-page .info-block .info > div {
+    display: flex;
+    margin-top: 0.5vw;
+}
+
+.account-page .info-block .info > div > .ref {
+    margin-left: 0.3vw;
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.3s all;
+}
+
+.account-page .info-block .info > div > .ref:hover {
+    color: #ff5c5c;
+    scale: 1.03;
+}
+
+.account-page .info-block .info > div > .ref:active {
+    color: #c64848;
+    scale: 1.01;
 }
 
 .account-page .info-block .info > p:not(:first-of-type) {

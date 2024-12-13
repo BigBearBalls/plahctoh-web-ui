@@ -1,0 +1,75 @@
+.department-page {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    font-size: 1vw;
+    padding: 2vw 1vw;
+}
+
+.department-table {
+}
+
+.department-table .department-line {
+    display: grid;
+    grid-template-columns: 10% 40% 50%;
+}
+
+.department-table .department-line p {
+    text-align: center;
+    padding: 0.3vw 0;
+}
+
+.department-table .department-line {
+
+}
+
+.department-table .department-line:first-of-type {
+    border-bottom: 1px solid rgb(81, 81, 81);
+}
+
+.department-table .department-line p:first-of-type {
+    border-right: 1px solid rgb(81, 81, 81);
+}
+
+.department-table .department-line:not(:first-of-type) {
+    transition: 0.2s ease all;
+}
+
+.department-table .department-line:not(:first-of-type):hover {
+    background-color: rgba(223, 212, 212, 0.3);
+    cursor: pointer;
+}
+
+.department-table .department-line:not(:first-of-type):active {
+    background-color: rgba(223, 212, 212, 0.8);
+    cursor: pointer;
+}
+
+.department-info {
+    padding: 0 2vw;
+}
+
+.department-info .title {
+    font-size: 1.7vw;
+    overflow: scroll;
+}
+
+.department-info .team-leader {
+    font-size: 1.2vw;
+    display: flex;
+}
+
+.department-info .team-leader p:last-of-type {
+    text-decoration: underline;
+    margin-left: 0.3vw;
+    transition: 0.2s ease all;
+}
+
+.department-info .team-leader p:last-of-type:hover {
+    color: #ff5c5c;
+    cursor: pointer;
+}
+
+.department-info .team-leader p:last-of-type:active {
+    color: firebrick;
+    cursor: pointer;
+}

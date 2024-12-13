@@ -3,6 +3,7 @@
     width: 30%;
     padding: 4vw 1vw;
     text-align: center;
+    min-height: 100vh;
 }
 
 .not-found p {

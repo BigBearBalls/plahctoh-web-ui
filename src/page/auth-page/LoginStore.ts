@@ -80,10 +80,14 @@ export default class LoginStore {
         try {
             // const response = await $api.post(`/auth/refresh`, {},
             //     {withCredentials: true});
-            await accountStore.getUserAccount()
 
+            if (localStorage.getItem(Constants.ACCESS_TOKEN_KEY) != null) {
+                await accountStore.getUserAccount()
+                globalStore.isAuthenticated = true
+            } else {
+                globalStore.isAuthenticated = false;
+            }
             // localStorage.setItem(Constants.ACCESS_TOKEN_KEY, response.data.accessToken);
-            globalStore.isAuthenticated = true
         } catch (e) {
             globalStore.isAuthenticated = false;
         } finally {

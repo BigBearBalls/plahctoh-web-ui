@@ -22,13 +22,15 @@ function Header() {
                         <ul className="nav">
                             <NavLink className={({isActive}) => isActive ?
                                 'li btn-effect active' : 'li btn-effect'} to="/home">Home</NavLink>
+                            <NavLink className={({isActive}) => isActive ?
+                                'li btn-effect active' : 'li btn-effect'} to="/departments">Departments</NavLink>
                         </ul>
                         <div className="account">
                             <p className="name">
                                 {accountStore.user.firstName} {accountStore.user.lastName}
                             </p>
                             <NavLink className={({isActive}) => isActive ?
-                                'active logo' : 'logo'} to="/account">
+                                'active logo' : 'logo'} to="/account/">
                                 <VscAccount className="logo"/>
                             </NavLink>
                             <p className="logout-btn btn-effect" onClick={handleLogout}>Logout</p>
