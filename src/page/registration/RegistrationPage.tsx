@@ -7,6 +7,7 @@ import "./RegistrationStyles.css"
 import {observer} from "mobx-react-lite";
 import {NavLink, useNavigate} from "react-router";
 import RegistrationRequest from "../../models/dto/RegistrationRequest";
+import {Constants} from "../../util/Constants";
 
 
 function RegistrationPage() {
@@ -43,7 +44,7 @@ function RegistrationPage() {
 
     return (
         <div className="registration-page">
-            <h1>Plankton</h1>
+            <h1>{Constants.APP_NAME}</h1>
             <div className="registration-page-block">
                 <h1>Registration</h1>
                 <label>

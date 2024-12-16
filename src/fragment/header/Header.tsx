@@ -4,6 +4,7 @@ import {observer} from "mobx-react-lite";
 import "./HeaderStyles.css"
 import {accountStore, authStore} from "../../Context";
 import { VscAccount } from "react-icons/vsc";
+import {Constants} from "../../util/Constants";
 
 function Header() {
 
@@ -16,7 +17,7 @@ function Header() {
             <div className="container">
                 <div className="header-body">
                     <div className="title">
-                        <p>Plankton</p>
+                        <p>{Constants.APP_NAME}</p>
                     </div>
                     <div>
                         <ul className="nav">

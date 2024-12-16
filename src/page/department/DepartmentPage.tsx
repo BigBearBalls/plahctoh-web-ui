@@ -25,9 +25,18 @@ function DepartmentPage() {
             departmentStore.getDepartment(department.id)}>
             <p className="column-value">{index+1}</p>
             <p className="column-value">{department.departmentName}</p>
-            {department.teamLeaderAccountPreview &&
-                <p className="column-value">{department.teamLeaderAccountPreview.firstName} {department.teamLeaderAccountPreview.lastName}</p> }
+            {department.teamLeaderAccountPreview?.id ?
+                <p className="column-value">
+                    {department.teamLeaderAccountPreview.firstName} {department.teamLeaderAccountPreview.lastName}</p> :
+                <p className="column-value-none">None</p>}
 
+        </div>
+    }
+
+    const nothingFoundDepartmentLine = () => {
+        return <div className="department-line nothing-found">
+            <p className="column-value"></p>
+            <p className="column-value">Nothing found!</p>
         </div>
     }
 
@@ -40,8 +49,10 @@ function DepartmentPage() {
                         <p className="column-title">Title</p>
                         <p className="column-title">Team Leader</p>
                     </div>
-                    {departmentStore.departments.map((department, index) =>
-                        departmentLine(department, index))}
+                    {departmentStore.departments.length !== 0 ?
+                        departmentStore.departments.map((department, index) =>
+                        departmentLine(department, index)): nothingFoundDepartmentLine()
+                    }
                 </div>
                 {departmentStore.selectedDepartment.id !== undefined && <DepartmentInfo/>}
             </div>

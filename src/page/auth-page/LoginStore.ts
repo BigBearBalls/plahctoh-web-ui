@@ -45,7 +45,7 @@ export default class LoginStore {
         } catch (e: any) {
             // globalStore.checkException(e);
             globalStore.isAuthenticated = false;
-            console.log(e.response?.data);
+            console.log(e.response);
             this.clearErrors();
             if (e.response.status === 400 &&
                 e.response.data.message as Iterable<Violation> &&

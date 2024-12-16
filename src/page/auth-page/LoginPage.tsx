@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import LoginRequest from "../../models/dto/LoginRequest";
 import {authStore, globalStore} from "../../Context";
 import { IoEyeOutline } from "react-icons/io5";
@@ -7,6 +7,7 @@ import { MdErrorOutline } from "react-icons/md";
 import "./LoginStyles.css"
 import {observer} from "mobx-react-lite";
 import {NavLink, useNavigate} from "react-router";
+import {Constants} from "../../util/Constants";
 
 
 function LoginPage() {
@@ -17,6 +18,7 @@ function LoginPage() {
 
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
     const navigate = useNavigate();
+    const isMounted = useRef(false);
 
     const onChange = (e: any) => {
         const {name, value} = e.target;
@@ -35,9 +37,16 @@ function LoginPage() {
         setPasswordVisible(!passwordVisible);
     }
 
+    useEffect(() => {
+        if (!isMounted.current) {
+            authStore.clearErrors()
+            isMounted.current = true;
+        }
+    })
+
     return (
         <div className="auth-page">
-            <h1>Plankton</h1>
+            <h1>{Constants.APP_NAME}</h1>
             <div className="auth-page-block">
                 <h1>Login</h1>
                 <label>

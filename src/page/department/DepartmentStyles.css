@@ -44,6 +44,15 @@
     cursor: pointer;
 }
 
+.department-table .department-line .column-value-none {
+    color: #989797;
+}
+
+.department-table .department-line.nothing-found {
+    grid-template-columns: 10% 90%;
+    color: #989797;
+}
+
 .department-info {
     padding: 0 2vw;
 }

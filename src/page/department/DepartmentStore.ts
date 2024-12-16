@@ -12,6 +12,7 @@ export default class DepartmentStore {
 
     private _departments: Department[] = [] as Department[];
     private _selectedDepartment: Department = {} as Department;
+    private _selectedDepartmentUsers: PreviewAccountDTO[] = [];
     private _page: number = 1;
     private _size: number = 10;
 
@@ -31,6 +32,10 @@ export default class DepartmentStore {
         this._selectedDepartment = value;
     }
 
+    set selectedDepartmentUsers(value: PreviewAccountDTO[]) {
+        this._selectedDepartmentUsers = value;
+    }
+
     get page() {
         return this._page;
     }
@@ -45,6 +50,10 @@ export default class DepartmentStore {
 
     get selectedDepartment() {
         return this._selectedDepartment;
+    }
+
+    get selectedDepartmentUsers() {
+        return this._selectedDepartmentUsers;
     }
 
     async getDepartmentPage() {
@@ -82,5 +91,10 @@ export default class DepartmentStore {
             departmentName: response.data.departmentName,
             teamLeaderAccountPreview: teamLeaderAccountPreview,
         };
+    }
+
+    async getDepartmentUsers(departmentId: string) {
+        const response = await DepartmentService.getDepartmentUsers(departmentId);
+
     }
 }

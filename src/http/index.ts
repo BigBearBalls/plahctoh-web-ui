@@ -42,7 +42,7 @@ $api.interceptors.response.use((config) => {
         globalStore.isAuthenticated = false;
         accountStore.user = {} as User
         localStorage.removeItem(Constants.ACCESS_TOKEN_KEY);
-        return
+        throw error;
     }
     popUpStore.setPopUp(true, Type.ERROR, error.response.data.message);
     throw error;
