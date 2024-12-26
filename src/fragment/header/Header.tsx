@@ -25,6 +25,8 @@ function Header() {
                                 'li btn-effect active' : 'li btn-effect'} to="/home">Home</NavLink>
                             <NavLink className={({isActive}) => isActive ?
                                 'li btn-effect active' : 'li btn-effect'} to="/departments">Departments</NavLink>
+                            <NavLink className={({isActive}) => isActive ?
+                                'li btn-effect active' : 'li btn-effect'} to="/meeting-room">Meeting Rooms</NavLink>
                         </ul>
                         <div className="account">
                             <p className="name">

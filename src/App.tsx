@@ -11,6 +11,8 @@ import PopUp from "./fragment/popup-block/PopUp";
 import {observer} from "mobx-react-lite";
 import AccountPage from "./page/account/AccountPage";
 import DepartmentPage from "./page/department/DepartmentPage";
+import MeetingRoomPage from "./page/meeting-room/MeetingRoomPage";
+
 
 function App() {
 
@@ -34,7 +36,8 @@ function App() {
                       <Route path="/" element={<Layout/>}>
                           <Route path="/account/:userId?" element={<AccountPage />} />
                           <Route path="/departments" element={<DepartmentPage />} />
-                          <Route path="*" element={<NotFoundPage />} />
+                          <Route path="/meeting-room" element={<MeetingRoomPage />} />
+                        <Route path="*" element={<NotFoundPage />} />
                       </Route>
                   </Routes> :
                   <Routes>

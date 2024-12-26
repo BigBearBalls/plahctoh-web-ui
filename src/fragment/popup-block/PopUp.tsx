@@ -14,7 +14,7 @@ function PopUp() {
         <>
             {popUpStore.enabled && <div className={`${Type[popUpStore.type].toLowerCase()} pop-up`}>
                 <div className="close-btn" onClick={closeHandler}>x</div>
-                <p className="message">{popUpStore.message}asd</p>
+                <p className="message">{popUpStore.message}</p>
             </div>}
         </>
     );
