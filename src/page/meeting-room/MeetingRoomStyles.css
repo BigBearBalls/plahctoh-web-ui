@@ -130,8 +130,14 @@
 }
 
 .react-calendar__tile--active {
-    background-color: #007BFF;
-    color: #fff;
+    background-color: #ea7373 !important;
+    font-weight: bold !important;
+    border-radius: 5px;
+}
+
+.react-calendar__tile--now {
+    background-color: #e3e3e3 !important;
+    color: black !important;
     border-radius: 5px;
 }
 
@@ -156,7 +162,7 @@
 .time-slots-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 10px;
+    gap: 0.7vw;
     justify-items: center;
 }
 
@@ -166,12 +172,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /*border: 1px solid black;*/
+    border-radius: 1vw;
+    box-shadow: 0 2px 0.3vw rgba(0, 0, 0, 0.4);
     transition: background-color 0.2s, transform 0.2s;
     font-size: 0.9rem;
     text-align: center;
+    font-weight: bold;
+    color: #504f4f;
 }
 
 .time-slot.free:hover {
@@ -226,20 +234,22 @@
 }
 
 .booking-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
     border-radius: 10px;
     padding: 20px 40px;
     font-size: 1.5rem;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: all 0.3s ease;
     width: 100%;
-    max-width: 400px;
+    max-width: 353px;
+    font-weight: bold;
 }
 
 .booking-button:hover {
-    background-color: #0056b3;
+    color: white;
+    background-color: #ea7373;
     transform: scale(1.05);
 }
 
