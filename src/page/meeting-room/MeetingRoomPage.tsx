@@ -126,6 +126,13 @@ const MeetingRoomPage: React.FC = observer(() => {
                 return;
             }
         }
+        let selectedTimeSlots = timeSlots.filter(slot => slot.status === "selected" );
+
+
+        if (selectedRoomId && selectedDate instanceof Date) {
+            const formattedDate = formatLocalDate(selectedDate);
+            meetingRoomStore.saveBooking(selectedRoomId.toString(), formattedDate, selectedTimeSlots[0].startTime, selectedTimeSlots[selectedTimeSlots.length - 1].endTime);
+        }
 
         popUpStore.setPopUp(true, Type.SUCCESS, "Booking successful!");
     };

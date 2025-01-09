@@ -73,6 +73,33 @@ class MeetingRoomStore {
         }
     }
 
+    async saveBooking(meetingRoomId: string, bookingDate: string, bookingStart: string, bookingEnd: string) {
+        this._loading = true;
+        this._error = null;
+
+        try {
+            const response2 = await MeetingRoomService.createBooking(meetingRoomId, bookingDate, bookingStart, bookingEnd);
+
+            const response = await MeetingRoomService.getBookedTimeSlots(meetingRoomId, bookingDate);
+            const bookedSlots = response.data;
+
+            const allSlots = this.generateAllSlots(bookingDate);
+            this._timeSlots = allSlots.map((slot) => {
+                const isBooked = bookedSlots.some(
+                    (booked) => booked.reservationStart.slice(0, 5) === slot.startTime
+                );
+                return {
+                    ...slot,
+                    status: isBooked ? "booked" : "free",
+                };
+            });
+        } catch (error: any) {
+            this._error = error.message || "Error fetching time slots.";
+        } finally {
+            this._loading = false;
+        }
+    }
+
     private generateAllSlots(date: string): TimeSlot[] {
         const slots: TimeSlot[] = [];
         const [year, month, day] = date.split("-").map(Number);
