@@ -138,8 +138,7 @@ const MeetingRoomPage: React.FC = observer(() => {
     };
 
     return (
-        <div className="meeting-room-page">
-            <h1>Meeting Rooms</h1>
+        <div className="container">
 
             <div className="selected-info-container">
                 <div className="selected-info">
@@ -159,6 +158,7 @@ const MeetingRoomPage: React.FC = observer(() => {
 
             <div className="layout">
                 <div className="meeting-room-grid">
+                    <p>Meeting Rooms</p>
                     {meetingRoomStore.meetingRooms.map((room) => (
                         <div
                             key={room.id}
@@ -166,12 +166,12 @@ const MeetingRoomPage: React.FC = observer(() => {
                                 selectedRoomId === room.id ? "selected-room" : ""
                             }`}
                             onClick={() => (selectedRoomId !== room.id ? onRoomSelect(room) : null)}
-                            style={{
-                                cursor: selectedRoomId === room.id ? "not-allowed" : "pointer",
-                                backgroundColor: selectedRoomId === room.id ? "#d0e8ff" : undefined,
-                            }}
+                            // style={{
+                            //     cursor: selectedRoomId === room.id ? "not-allowed" : "pointer",
+                            //     backgroundColor: selectedRoomId === room.id ? "#d0e8ff" : undefined,
+                            // }}
                         >
-                            <h2>Meeting room №{room.number}</h2>
+                            <p>Meeting room №{room.number}</p>
                         </div>
                     ))}
                 </div>
