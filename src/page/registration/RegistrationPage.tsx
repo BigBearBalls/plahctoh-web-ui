@@ -59,7 +59,8 @@ function RegistrationPage() {
                             {registrationStore.hasError("email") && <MdErrorOutline className="error-icon"/>}
                         </div>
                     </div>
-                    {registrationStore.hasError("email") && <p className="red-color">{registrationStore.getError("email")}</p>}
+                    {registrationStore.hasError("email") &&
+                        <p className="red-color">{registrationStore.getError("email")}</p>}
                 </label>
                 <label>
                     <div>
@@ -77,7 +78,8 @@ function RegistrationPage() {
                             {registrationStore.hasError("password") && <MdErrorOutline className="error-icon"/>}
                         </div>
                     </div>
-                    {registrationStore.hasError("password") && <p className="red-color">{registrationStore.getError("password")}</p>}
+                    {registrationStore.hasError("password") &&
+                        <p className="red-color">{registrationStore.getError("password")}</p>}
                 </label>
                 <label>
                     <div>
@@ -132,6 +134,21 @@ function RegistrationPage() {
                     {registrationStore.hasError("phoneNumber") &&
                         <p className="red-color">{registrationStore.getError("phoneNumber")}</p>}
                 </label>
+
+                <label>
+                    <div>
+                        <p>TL Token</p>
+                    </div>
+                    <div className={`${registrationStore.hasError("tlToken") && "error"} input-field`}>
+                        <input name="tlToken" onChange={onChange}/>
+                        <div className="error-icon">
+                            {registrationStore.hasError("tlToken") && <MdErrorOutline className="error-icon"/>}
+                        </div>
+                    </div>
+                    {registrationStore.hasError("tlToken") &&
+                        <p className="red-color">{registrationStore.getError("tlToken")}</p>}
+                </label>
+
                 {(regData.email && regData.password && regData.confirmPassword && regData.firstName && regData.lastName
                     && regData.phoneNumber) ?
                     <button onClick={onSubmit} className={`${globalStore.isLoading && 'loading'}`}>Sign

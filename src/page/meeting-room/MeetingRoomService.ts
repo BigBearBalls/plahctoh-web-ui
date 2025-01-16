@@ -5,6 +5,9 @@ import { MeetingRoomDto } from "../../models/dto/MeetingRoomDto";
 interface TimeSlotResponseDTO {
     reservationStart: string;
     reservationEnd: string;
+    status: "FREE" | "APPROVED" | "PENDING";
+    teamLeadFirstName?: string;
+    teamLeadSecondName?: string;
 }
 
 export class MeetingRoomService {

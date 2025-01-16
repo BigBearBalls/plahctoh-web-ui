@@ -1,5 +1,6 @@
 .account-page {
     padding: 2vw 2vw;
+    position: relative;
 }
 
 .account-page > p:first-of-type {
@@ -52,3 +53,28 @@
 .account-page .info-block .info > p:not(:first-of-type) {
     margin-top: 0.5vw;
 }
+
+.team-lead-button {
+    position: absolute;
+    top: 8%;
+    right: 5%;
+    background-color: #f3997b;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.team-lead-button:hover {
+    background-color: #ef6666;
+    transform: scale(1.05);
+}
+
+/*.team-lead-button:active {*/
+/*    background-color: #003f7f;*/
+/*    transform: scale(1);*/
+/*}*/

@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from "react";
-import {observer} from "mobx-react-lite";
-import {meetingRoomStore} from "./MeetingRoomStore";
-import {popUpStore} from "../../Context";
+import React, { useEffect, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { meetingRoomStore } from "./MeetingRoomStore";
+import { popUpStore } from "../../Context";
 import "./MeetingRoomStyles.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import {Type} from "../../fragment/popup-block/Type";
+import { Type } from "../../fragment/popup-block/Type";
 
 type CalendarValue = Date | [Date, Date] | null;
 
 interface TimeSlot {
     startTime: string;
     endTime: string;
-    status: "free" | "booked" | "selected";
+    status: "free" | "approved" | "pending" | "past" | "selected";
+    teamLeadName?: string;
 }
 
 const MeetingRoomPage: React.FC = observer(() => {
@@ -21,7 +22,6 @@ const MeetingRoomPage: React.FC = observer(() => {
     const [selectedRoom, setSelectedRoom] = useState<string | null>(null);
     const [timeSlots, setTimeSlots] = useState<TimeSlot[]>([]);
     const [doubleClickIndexes, setDoubleClickIndexes] = useState<number[]>([]);
-
     const isButtonVisible = timeSlots.some((slot) => slot.status === "selected");
 
     useEffect(() => {
@@ -36,7 +36,13 @@ const MeetingRoomPage: React.FC = observer(() => {
     }, [selectedRoomId, selectedDate]);
 
     useEffect(() => {
-        setTimeSlots(meetingRoomStore.timeSlots.map((slot) => ({ ...slot, status: slot.status })));
+        setTimeSlots(
+            meetingRoomStore.timeSlots.map((slot) => ({ ...slot }))
+        );
+    }, [meetingRoomStore.timeSlots]);
+
+    useEffect(() => {
+        setTimeSlots(meetingRoomStore.timeSlots);
     }, [meetingRoomStore.timeSlots]);
 
     const formatLocalDate = (date: Date): string => {
@@ -52,14 +58,6 @@ const MeetingRoomPage: React.FC = observer(() => {
         }
     };
 
-    const onRoomSelect = (room: { id: number; number: number }) => {
-        if (selectedRoomId === room.id) return;
-        setSelectedRoomId(room.id);
-        setSelectedRoom(`Meeting Room №${room.number}`);
-        setTimeSlots([]);
-        setDoubleClickIndexes([]);
-    };
-
     const handleSlotClick = (index: number) => {
         const updatedSlots = [...timeSlots];
 
@@ -67,43 +65,6 @@ const MeetingRoomPage: React.FC = observer(() => {
             updatedSlots[index].status === "selected" ? "free" : "selected";
 
         setTimeSlots(updatedSlots);
-    };
-
-    const handleSlotDoubleClick = (index: number) => {
-        const updatedDoubleClickIndexes = [...doubleClickIndexes, index];
-
-        if (updatedDoubleClickIndexes.length === 2) {
-            const [startIndex, endIndex] = updatedDoubleClickIndexes.sort((a, b) => a - b);
-
-            const updatedSlots = [...timeSlots];
-
-            const hasBookedSlots = updatedSlots
-                .slice(startIndex + 1, endIndex)
-                .some((slot) => slot.status === "booked");
-
-            if (hasBookedSlots) {
-                popUpStore.setPopUp(
-                    true,
-                    Type.ERROR,
-                    "You cannot select slots that include booked slots in between."
-                );
-
-                updatedSlots.forEach((slot) => {
-                    if (slot.status === "selected") {
-                        slot.status = "free";
-                    }
-                });
-            } else {
-                for (let i = startIndex; i <= endIndex; i++) {
-                    updatedSlots[i].status = "selected";
-                }
-            }
-
-            setDoubleClickIndexes([]);
-            setTimeSlots(updatedSlots);
-        } else {
-            setDoubleClickIndexes(updatedDoubleClickIndexes);
-        }
     };
 
     const handleBooking = () => {
@@ -137,21 +98,60 @@ const MeetingRoomPage: React.FC = observer(() => {
         popUpStore.setPopUp(true, Type.SUCCESS, "Booking successful!");
     };
 
+    const handleSlotDoubleClick = (index: number) => {
+        const updatedDoubleClickIndexes = [...doubleClickIndexes, index];
+
+        if (updatedDoubleClickIndexes.length === 2) {
+            const [startIndex, endIndex] = updatedDoubleClickIndexes.sort((a, b) => a - b);
+
+            const updatedSlots = [...timeSlots];
+
+            const hasBookedSlots = updatedSlots
+                .slice(startIndex + 1, endIndex)
+                .some((slot) => slot.status === "approved" || slot.status === "pending");
+
+            if (hasBookedSlots) {
+                popUpStore.setPopUp(
+                    true,
+                    Type.ERROR,
+                    "You cannot select slots that include booked slots in between."
+                );
+
+                updatedSlots.forEach((slot) => {
+                    if (slot.status === "selected") {
+                        slot.status = "free";
+                    }
+                });
+            } else {
+                for (let i = startIndex; i <= endIndex; i++) {
+                    updatedSlots[i].status = "selected";
+                }
+            }
+
+            setDoubleClickIndexes([]);
+            setTimeSlots(updatedSlots);
+        } else {
+            setDoubleClickIndexes(updatedDoubleClickIndexes);
+        }
+    };
+
+
+    const onRoomSelect = (room: { id: number; number: number }) => {
+        if (selectedRoomId === room.id) return;
+        setSelectedRoomId(room.id);
+        setSelectedRoom(`Meeting Room №${room.number}`);
+        setTimeSlots([]);
+    };
+
     return (
         <div className="container">
-
             <div className="selected-info-container">
                 <div className="selected-info">
                     <p>
                         Selected meeting room: <strong>{selectedRoom || "not selected"}</strong>
                     </p>
                     <p>
-                        Selected date:{" "}
-                        <strong>
-                            {selectedDate instanceof Date
-                                ? selectedDate.toLocaleDateString()
-                                : "not selected"}
-                        </strong>
+                        Selected date: <strong>{selectedDate instanceof Date ? selectedDate.toLocaleDateString() : "not selected"}</strong>
                     </p>
                 </div>
             </div>
@@ -162,14 +162,8 @@ const MeetingRoomPage: React.FC = observer(() => {
                     {meetingRoomStore.meetingRooms.map((room) => (
                         <div
                             key={room.id}
-                            className={`meeting-room-card ${
-                                selectedRoomId === room.id ? "selected-room" : ""
-                            }`}
-                            onClick={() => (selectedRoomId !== room.id ? onRoomSelect(room) : null)}
-                            // style={{
-                            //     cursor: selectedRoomId === room.id ? "not-allowed" : "pointer",
-                            //     backgroundColor: selectedRoomId === room.id ? "#d0e8ff" : undefined,
-                            // }}
+                            className={`meeting-room-card ${selectedRoomId === room.id ? "selected-room" : ""}`}
+                            onClick={() => onRoomSelect(room)}
                         >
                             <p>Meeting room №{room.number}</p>
                         </div>
@@ -189,10 +183,11 @@ const MeetingRoomPage: React.FC = observer(() => {
                             </button>
                         </div>
                     )}
+
                 </div>
 
                 <div className="time-slots-container">
-                    <h2>Available Time Slots</h2>
+                    <h2>Time Slots</h2>
                     <div className="time-slots-grid">
                         {timeSlots.map((slot, index) => (
                             <div
@@ -200,25 +195,65 @@ const MeetingRoomPage: React.FC = observer(() => {
                                 className={`time-slot ${slot.status}`}
                                 style={{
                                     backgroundColor:
-                                        slot.status === "booked"
+                                        slot.status === "approved"
                                             ? "#f7d7d7"
-                                            : slot.status === "selected"
-                                                ? "#add8e6"
-                                                : "#e0f7e9",
-                                    cursor: slot.status === "booked" ? "not-allowed" : "pointer",
+                                            : slot.status === "pending"
+                                                ? "#fbf9af"
+                                                : slot.status === "past"
+                                                    ? "#d3d3d3"
+                                                    : slot.status === "selected"
+                                                        ? "#add8e6"
+                                                        : "#e0f7e9",
+                                    cursor:
+                                        slot.status === "approved" ||
+                                        slot.status === "pending" ||
+                                        slot.status === "past"
+                                            ? "not-allowed"
+                                            : "pointer",
                                 }}
-                                onClick={() =>
-                                    slot.status !== "booked" && handleSlotClick(index)
-                                }
-                                onDoubleClick={() =>
-                                    slot.status !== "booked" && handleSlotDoubleClick(index)
-                                }
+                                onClick={() => {
+                                    if (slot.status !== "approved" && slot.status !== "pending" && slot.status !== "past") {
+                                        handleSlotClick(index);
+                                    }
+                                }}
+                                onDoubleClick={() => {
+                                    if (slot.status !== "approved" && slot.status !== "pending" && slot.status !== "past") {
+                                        handleSlotDoubleClick(index);
+                                    }
+                                }}
+                                onMouseEnter={(e) => {
+                                    if (slot.status === "pending") {
+                                        const tooltip = document.createElement("div");
+                                        tooltip.className = "custom-tooltip";
+                                        tooltip.innerText = slot.teamLeadName
+                                            ? `Waiting for approval from ${slot.teamLeadName}`
+                                            : "Waiting for approval";
+                                        tooltip.style.position = "absolute";
+                                        tooltip.style.left = `${e.clientX}px`;
+                                        tooltip.style.top = `${e.clientY}px`;
+                                        tooltip.style.transition = "opacity 0.3s ease-in-out";
+                                        tooltip.style.opacity = "0";
+                                        document.body.appendChild(tooltip);
+                                        setTimeout(() => {
+                                            tooltip.style.opacity = "1";
+                                        }, 100);
+                                    }
+                                }}
+                                onMouseLeave={() => {
+                                    const tooltip = document.querySelector(".custom-tooltip");
+                                    if (tooltip) {
+                                        tooltip.remove();
+                                    }
+                                }}
                             >
                                 {slot.startTime} - {slot.endTime}
                             </div>
+
+
                         ))}
                     </div>
                 </div>
+
             </div>
         </div>
     );

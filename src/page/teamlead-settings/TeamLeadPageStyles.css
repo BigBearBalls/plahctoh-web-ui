@@ -1,0 +1,75 @@
+.team-lead-settings-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.create-token-button {
+    background-color: #f3997b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.create-token-button:hover {
+    background-color: #ef6666;
+}
+
+.invite-token-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.invite-token-textarea {
+    align-items: center;
+    width: 50%;
+    height: 50px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.copy-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.copy-token-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.copy-token-button:hover {
+    background-color: #218838;
+}
+
+.copy-token-button:active {
+    background-color: #1e7e34;
+}
+
+.copy-success-message {
+    font-size: 0.9rem;
+    color: #28a745;
+    font-weight: bold;
+}

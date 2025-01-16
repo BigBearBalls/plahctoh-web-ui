@@ -274,6 +274,46 @@
     text-decoration: underline;
 }
 
+.time-slot.pending {
+    background-color: #ece399;
+    border: 1px solid #f3e088;
+    color: #333;
+    cursor: not-allowed;
+}
+
+.custom-tooltip {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.custom-tooltip.show {
+    opacity: 1;
+}
+.custom-tooltip {
+    background-color: #b5b8ff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    border: 1px solid #ddd;
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.custom-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.time-slot {
+    user-select: none;
+}
 
 
 

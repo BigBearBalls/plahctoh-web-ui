@@ -12,6 +12,7 @@ import {observer} from "mobx-react-lite";
 import AccountPage from "./page/account/AccountPage";
 import DepartmentPage from "./page/department/DepartmentPage";
 import MeetingRoomPage from "./page/meeting-room/MeetingRoomPage";
+import TeamLeadPage from "./page/teamlead-settings/TeamLeadPage";
 
 
 function App() {
@@ -27,28 +28,29 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <PopUp/>
-      {isLoaded &&
-          <BrowserRouter>
+      <div className="App">
+        <PopUp/>
+        {isLoaded &&
+            <BrowserRouter>
               {globalStore.isAuthenticated ?
                   <Routes>
-                      <Route path="/" element={<Layout/>}>
-                          <Route path="/account/:userId?" element={<AccountPage />} />
-                          <Route path="/departments" element={<DepartmentPage />} />
-                          <Route path="/meeting-room" element={<MeetingRoomPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
-                      </Route>
+                    <Route path="/" element={<Layout/>}>
+                      <Route path="/account/:userId?" element={<AccountPage/>}/>
+                      <Route path="/departments" element={<DepartmentPage/>}/>
+                      <Route path="/meeting-room" element={<MeetingRoomPage/>}/>
+                      <Route path="/team-lead-settings" element={<TeamLeadPage/>}/>
+                      <Route path="*" element={<NotFoundPage/>}/>
+                    </Route>
                   </Routes> :
                   <Routes>
-                    <Route path="*" element={<Navigate to="/login" replace />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/registration" element={<RegistrationPage />} />
+                    <Route path="*" element={<Navigate to="/login" replace/>}/>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/registration" element={<RegistrationPage/>}/>
                   </Routes>
               }
-          </BrowserRouter>
-      }
-    </div>
+            </BrowserRouter>
+        }
+      </div>
   );
 }
 
