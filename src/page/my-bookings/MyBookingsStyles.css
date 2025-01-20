@@ -1,0 +1,90 @@
+.booking-table {
+    width: 80%;
+    border-collapse: collapse;
+}
+
+.booking-table .booking-line {
+    display: grid;
+    grid-template-columns: 5% 25% 15% 15% 15% 25%;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.booking-table .booking-line:first-of-type {
+    border-bottom: 2px solid rgb(81, 81, 81);
+    font-weight: bold;
+    background-color: #f3f3f3;
+}
+
+.booking-table .booking-line p {
+    text-align: center;
+    padding: 0.6vw 0;
+}
+
+.booking-table .booking-line:not(:first-of-type):hover {
+    background-color: rgba(223, 212, 212, 0.3);
+    cursor: pointer;
+}
+
+.booking-table .booking-line:not(:first-of-type):active {
+    background-color: rgba(223, 212, 212, 0.8);
+}
+
+.booking-table .booking-line.nothing-found {
+    grid-template-columns: 5% 95%;
+    color: #989797;
+    text-align: center;
+}
+
+.booking-table .booking-line .column-value-none {
+    color: #989797;
+}
+
+.booking-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 1vw;
+}
+
+.sorting-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    left: 1vw;
+    width: 8vw;
+    position: relative;
+}
+
+.sorting-title {
+    font-size: 1vw;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.7vw;
+}
+
+.sorting-dropdown {
+    width: 100%;
+    padding: 0.5vw;
+    font-size: 0.9vw;
+    border: 1px solid #bbb;
+    border-radius: 0.3vw;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.sorting-dropdown:hover {
+    border-color: #888;
+}
+
+.sorting-dropdown:focus {
+    outline: none;
+    border-color: #555;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
+
+

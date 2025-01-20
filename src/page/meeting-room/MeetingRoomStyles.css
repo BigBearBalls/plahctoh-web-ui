@@ -67,9 +67,6 @@
     cursor: pointer;
 }
 
-.meeting-room-card:hover {
-}
-
 .meeting-room-card p{
     font-size: 0.9vw;
     font-weight: bold;
@@ -313,6 +310,46 @@
 
 .time-slot {
     user-select: none;
+}
+
+.selected-info-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-top: 1vw;
+}
+
+.selected-info {
+    text-align: center;
+    max-width: 50%;
+    min-width: 300px;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.selected-info-container-button {
+    position: absolute;
+    top: 1.8vw;
+    right: 3vw;
+}
+
+.my-bookings-btn {
+    background-color: #6db7f4;
+    color: white;
+    padding: 0.7vw 1vw;
+    border: none;
+    border-radius: 0.3vw;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.my-bookings-btn:hover {
+    background-color: #086585;
+    transform: scale(1.05);
 }
 
 

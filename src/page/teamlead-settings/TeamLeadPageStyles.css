@@ -58,6 +58,7 @@ h1 {
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
+    width: 6vw;
 }
 
 .copy-token-button:hover {
@@ -69,7 +70,12 @@ h1 {
 }
 
 .copy-success-message {
-    font-size: 0.9rem;
-    color: #28a745;
+    color: green;
     font-weight: bold;
+    font-size: 0.9rem;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+.copy-success-message.fade-out {
+    opacity: 0;
 }

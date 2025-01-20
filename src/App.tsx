@@ -13,6 +13,7 @@ import AccountPage from "./page/account/AccountPage";
 import DepartmentPage from "./page/department/DepartmentPage";
 import MeetingRoomPage from "./page/meeting-room/MeetingRoomPage";
 import TeamLeadPage from "./page/teamlead-settings/TeamLeadPage";
+import MyBookingsPage from "./page/my-bookings/MyBookingsPage";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                       <Route path="/departments" element={<DepartmentPage/>}/>
                       <Route path="/meeting-room" element={<MeetingRoomPage/>}/>
                       <Route path="/team-lead-settings" element={<TeamLeadPage/>}/>
+                      <Route path="/my-bookings" element={<MyBookingsPage/>}/>
                       <Route path="*" element={<NotFoundPage/>}/>
                     </Route>
                   </Routes> :

@@ -1,25 +1,34 @@
 import { makeAutoObservable } from "mobx";
-import { TeamLeadService } from "./TeamLeadService";
+import { TokenService } from "./TeamLeadService";
 
-export class TeamLeadStore {
-    private _data: any = null;
+class TokenStore {
+    private _registrationToken: string | null = null;
+    private _loading: boolean = false;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    get data() {
-        return this._data;
+    get token() {
+        return this._registrationToken;
     }
 
-    async fetchData() {
+    get loading() {
+        return this._loading;
+    }
+
+    async fetchToken() {
+        this._loading = true;
         try {
-            this._data = await TeamLeadService.getTeamLeadData();
+            const response = await TokenService.generateToken();
+            this._registrationToken = response.data.registrationToken;
         } catch (error) {
-            console.error("Error fetching team lead data:", error);
+            console.error("Failed to generate token:", error);
+            this._registrationToken = "Error generating token";
+        } finally {
+            this._loading = false;
         }
     }
 }
 
-export const teamLeadStore = new TeamLeadStore();
-export {};
+export const tokenStore = new TokenStore();

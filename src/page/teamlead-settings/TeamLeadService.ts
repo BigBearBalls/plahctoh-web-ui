@@ -1,9 +1,8 @@
-export class TeamLeadService {
-    // Добавьте методы, которые будут взаимодействовать с бэкендом
-    static async getTeamLeadData(): Promise<any> {
-        // Пример запроса
-        return await fetch("/api/team-lead-data").then((response) => response.json());
+import { AxiosResponse } from "axios";
+import $api from "../../http";
+
+export class TokenService {
+    static async generateToken(): Promise<AxiosResponse<{ registrationToken: string }>> {
+        return $api.post<{ registrationToken: string }>("/tokens/");
     }
 }
-
-export {};

@@ -6,6 +6,7 @@ import "./MeetingRoomStyles.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { Type } from "../../fragment/popup-block/Type";
+import { useNavigate, useParams } from "react-router";
 
 type CalendarValue = Date | [Date, Date] | null;
 
@@ -51,6 +52,8 @@ const MeetingRoomPage: React.FC = observer(() => {
         const day = date.getDate().toString().padStart(2, "0");
         return `${year}-${month}-${day}`;
     };
+
+    const navigate = useNavigate();
 
     const onDateChange = (value: Date | Date[] | null) => {
         if (value instanceof Date) {
@@ -135,6 +138,9 @@ const MeetingRoomPage: React.FC = observer(() => {
         }
     };
 
+    const handleBookingAction = () => {
+        navigate("/my-bookings");
+    };
 
     const onRoomSelect = (room: { id: number; number: number }) => {
         if (selectedRoomId === room.id) return;
@@ -151,10 +157,20 @@ const MeetingRoomPage: React.FC = observer(() => {
                         Selected meeting room: <strong>{selectedRoom || "not selected"}</strong>
                     </p>
                     <p>
-                        Selected date: <strong>{selectedDate instanceof Date ? selectedDate.toLocaleDateString() : "not selected"}</strong>
+                        Selected
+                        date: <strong>{selectedDate instanceof Date ? selectedDate.toLocaleDateString() : "not selected"}</strong>
                     </p>
                 </div>
+                <div className="selected-info-container-button">
+                    <button
+                        className="my-bookings-btn"
+                        onClick={handleBookingAction}
+                    >
+                        My bookings
+                    </button>
+                </div>
             </div>
+
 
             <div className="layout">
                 <div className="meeting-room-grid">

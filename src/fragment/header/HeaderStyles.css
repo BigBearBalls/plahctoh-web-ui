@@ -3,6 +3,7 @@
     box-shadow: 1px 1px 1vw #a89e90;
     position: fixed;
     width: 100%;
+    z-index: 5;
 }
 
 .header-body {

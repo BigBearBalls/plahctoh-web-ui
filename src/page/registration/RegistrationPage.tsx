@@ -139,14 +139,14 @@ function RegistrationPage() {
                     <div>
                         <p>TL Token</p>
                     </div>
-                    <div className={`${registrationStore.hasError("tlToken") && "error"} input-field`}>
-                        <input name="tlToken" onChange={onChange}/>
+                    <div className={`${registrationStore.hasError("registrationToken") && "error"} input-field`}>
+                        <input name="registrationToken" onChange={onChange}/>
                         <div className="error-icon">
-                            {registrationStore.hasError("tlToken") && <MdErrorOutline className="error-icon"/>}
+                            {registrationStore.hasError("registrationToken") && <MdErrorOutline className="error-icon"/>}
                         </div>
                     </div>
-                    {registrationStore.hasError("tlToken") &&
-                        <p className="red-color">{registrationStore.getError("tlToken")}</p>}
+                    {registrationStore.hasError("registrationToken") &&
+                        <p className="red-color">{registrationStore.getError("registrationToken")}</p>}
                 </label>
 
                 {(regData.email && regData.password && regData.confirmPassword && regData.firstName && regData.lastName
